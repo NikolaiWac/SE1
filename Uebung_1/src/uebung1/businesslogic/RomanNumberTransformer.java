@@ -4,6 +4,9 @@ public class RomanNumberTransformer implements NumberTransformer{
 
     @Override
     public String transformNumber(int number) {
+        //if (number <= 0) {
+        //    return "";
+        //}
         if (number > 3000){
             return "Zahl darf nicht größer als 3.000 sein.";
         }
