@@ -28,7 +28,7 @@ class TestRomanNumberTransformer {
     @Test
     void testInvalidRomanNumbersTooLarge_uAEK2() {
         // Test der ungültigen Äquivalenzklasse > 3000
-        String expectedMessage = "Zahl darf nicht größer als 3.000 sein.";
+        String expectedMessage = "Zahl darf nicht kleiner als 1 und größer als 3.000 sein.";
 
         assertEquals(expectedMessage, transformer.transformNumber(3001), "Grenzwert 3001");
         assertEquals(expectedMessage, transformer.transformNumber(5000), "Repräsentant 5000");
@@ -37,9 +37,10 @@ class TestRomanNumberTransformer {
     @Test
     void testInvalidRomanNumbersTooSmall_uAEK1() {
         // Test der ungültigen Äquivalenzklasse <= 0
-        // Basierend auf der aktuellen Implementierung wird hier ein leerer String erwartet
-        assertEquals("", transformer.transformNumber(0), "Grenzwert 0");
-        assertEquals("", transformer.transformNumber(-1), "Repräsentant -1");
-        assertEquals("", transformer.transformNumber(Integer.MIN_VALUE), "Grenzwert MIN_INT");
+        String expectedMessage = "Zahl darf nicht kleiner als 1 und größer als 3.000 sein.";
+
+        assertEquals(expectedMessage, transformer.transformNumber(0), "Grenzwert 0");
+        assertEquals(expectedMessage, transformer.transformNumber(-1), "Repräsentant -1");
+        assertEquals(expectedMessage, transformer.transformNumber(Integer.MIN_VALUE), "Grenzwert MIN_INT");
     }
 }

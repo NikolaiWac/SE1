@@ -7,8 +7,10 @@ public class RomanNumberTransformer implements NumberTransformer{
         //if (number <= 0) {
         //    return "";
         //}
-        if (number > 3000){
-            return "Zahl darf nicht größer als 3.000 sein.";
+        //imWertebereich für (<=3000 >=1)
+        String NichtImBereich = imWertebereich(number);
+        if(NichtImBereich !=null){
+            return NichtImBereich;
         }
 
         int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};

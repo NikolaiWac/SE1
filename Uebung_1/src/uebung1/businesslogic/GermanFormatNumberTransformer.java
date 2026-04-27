@@ -8,9 +8,12 @@ public class GermanFormatNumberTransformer implements NumberTransformer{
 
     @Override
     public String transformNumber(int number) {
-        if (number > 3000){
-            return "Zahl darf nicht größer als 3.000 sein.";
+        //imWertebereich für (<=3000 >=1)
+        String NichtImBereich = imWertebereich(number);
+        if(NichtImBereich !=null){
+            return NichtImBereich;
         }
+
         DecimalFormat germanFormat = new DecimalFormat("#.###", DecimalFormatSymbols.getInstance(Locale.GERMANY));
         return germanFormat.format(number);
     }
