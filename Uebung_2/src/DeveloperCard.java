@@ -1,16 +1,36 @@
-public class DeveloperCard implements PersonCard{
+public class DeveloperCard implements PersonCard {
+    private String firstName;
+    private String lastName;
+    private int id;
+    private boolean enoughCoffee;
+
+    public DeveloperCard(int id, String firstName, String lastName, boolean enoughCoffee) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.enoughCoffee = enoughCoffee;
+    }
+
     @Override
     public String getFirstName() {
-        return "";
+        return this.firstName;
     }
 
     @Override
     public String getLastName() {
-        return "";
+        return this.lastName;
     }
 
     @Override
     public int getId() {
-        return 0;
+        return this.id;
+    }
+
+    public boolean hasEnoughCoffee() {
+        return enoughCoffee;
+    }
+
+    public void setEnoughCoffee(boolean enoughCoffee) {
+        this.enoughCoffee = enoughCoffee;
     }
 }
