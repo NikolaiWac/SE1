@@ -14,7 +14,7 @@ public class Client {
         DeveloperCard developerCard2 = new DeveloperCard(4,"Anna", "Müller",  true);
 
         // Zur CardBox hinzufügen
-        box.addPersonCard(endUserCard1);  //warum funktioniert die Polymorphie hier nicht?
+        box.addPersonCard(endUserCard1);  
         box.addPersonCard(endUserCard2);
         box.addPersonCard(developerCard1);
         box.addPersonCard(developerCard2);

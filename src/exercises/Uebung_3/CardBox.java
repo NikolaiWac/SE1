@@ -32,6 +32,9 @@ public class CardBox {
         return false;
     }
 
+   
+    }
+
     public void addPersonCard(PersonCard card) throws CardBoxException {
         if (card == null) {
             throw new CardBoxException(0);
@@ -41,7 +44,8 @@ public class CardBox {
             throw e;
         }
         cards.add(card);
-    }
+
+}
 
     public void save() throws CardboxStorageException {
 
