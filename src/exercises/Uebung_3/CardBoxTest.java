@@ -51,4 +51,63 @@ class TestCardBox {
         CardBoxException thrown2 = assertThrows(CardBoxException.class, ()
                 -> cardBox.addPersonCard(null), "Exception wurde nicht geworfen");
     }
+
+
+    @Test
+    void TestLoadException() {  //Testet ob eine nicht vorhandene box geladen werden kann.
+
+        CardBox box = CardBox.getUnikat();
+        box.clear();
+
+        assertThrows(CardboxStorageException.class, box::load);
+    }
+
+    @Test
+    void TestLoadEmptyBox() throws Exception { //Testet ob eine leere box geladen werden kann.
+
+        CardBox box = CardBox.getUnikat();
+        box.clear();
+        box.save();
+        box.load();
+
+        assertEquals(0, box.size());
+    }
+
+
+    @Test
+    void TestLoadBox() throws Exception { //Test ob der Inhalt beim Laden gleich bleibt.
+
+        CardBox box = CardBox.getUnikat();
+        box.clear();
+        EnduserCard endUserCard1 = new EnduserCard("John", "Doe", 1, true);
+        EnduserCard enduserCard2 = new EnduserCard("Jane", "Doe", 2, false);
+        box.addPersonCard(endUserCard1);
+        box.addPersonCard(enduserCard2);
+        box.save();
+        box.load();
+        List<PersonCard> list = box.getCurrentList();
+
+        assertEquals(2, list.size());
+        assertTrue(list.stream().anyMatch(p -> p.getId() == 1));
+        assertTrue(list.stream().anyMatch(p -> p.getId() == 2));
+    }
+    @Test
+    void TestOverrideBox() throws Exception {   // test ob die box beim laden die bestehende box überschreibt.
+
+        CardBox box = CardBox.getUnikat();
+        box.clear();
+        EnduserCard endUserCard1 = new EnduserCard("John", "Doe", 1, true);
+        EnduserCard enduserCard2 = new EnduserCard("Jane", "Doe", 2, false);
+        DeveloperCard developerCard1 = new DeveloperCard("Jim", "Jackson", 3, false);
+        box.addPersonCard(endUserCard1);
+        box.addPersonCard(enduserCard2);
+        box.save();
+
+        box.addPersonCard(developerCard1);
+        box.load();
+        assertEquals(2, box.size());
+    }
+
+
+
 }}
