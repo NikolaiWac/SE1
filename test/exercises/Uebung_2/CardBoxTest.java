@@ -1,6 +1,6 @@
 package exercises.Uebung_2;
 
-import exercises.Uebung_2.CardBox;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
