@@ -1,4 +1,4 @@
-
+package exercises.Uebung_3;
 
 public class CardBoxException extends Exception {
     public CardBoxException(int id) {

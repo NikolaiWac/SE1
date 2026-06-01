@@ -1,4 +1,4 @@
-
+package exercises.Uebung_3;
 
 public class DeveloperCard extends AbstractPersonCard {
     private static final long serialVersionID = 1L;

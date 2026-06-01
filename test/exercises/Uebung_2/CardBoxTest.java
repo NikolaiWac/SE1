@@ -1,6 +1,6 @@
 package exercises.Uebung_2;
 
-import exercises.Uebung_1.uebung1.businesslogic.RomanNumberTransformer;
+import exercises.Uebung_2.CardBox;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class CardBoxTest {
 
     private CardBox box;
-
     private DeveloperCard dev1;
     private EnduserCard user1;
 

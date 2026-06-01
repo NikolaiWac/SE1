@@ -1,3 +1,5 @@
+package exercises.Uebung_3;
+
 import java.io.Serializable;
 
 public abstract class AbstractPersonCard implements exercises.Uebung_3.PersonCard, Serializable {

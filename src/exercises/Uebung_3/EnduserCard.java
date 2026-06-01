@@ -1,4 +1,4 @@
-
+package exercises.Uebung_3;
 
 public class EnduserCard extends AbstractPersonCard {
     private boolean hungry;

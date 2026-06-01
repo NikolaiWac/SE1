@@ -1,4 +1,8 @@
+package exercises.Uebung_3;
 
+import exercises.Uebung_3.CardBox;
+import exercises.Uebung_3.DeveloperCard;
+import exercises.Uebung_3.EnduserCard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
