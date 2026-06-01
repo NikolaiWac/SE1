@@ -104,6 +104,9 @@ public class CardBox {
         }
     }
 
+    public void clear() {
+        cards.clear();
+    }
 
 
     public int size(){
