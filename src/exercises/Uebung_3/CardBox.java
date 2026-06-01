@@ -33,9 +33,9 @@ public class CardBox {
     }
 
     public void addPersonCard(PersonCard card) throws CardBoxException {
-        if (card == null) {
+        /*if (card == null) {
             throw new CardBoxException(0);
-        }
+        }*/
         if (contains(card)) {
             CardBoxException e = new CardBoxException(card.getId());
             throw e;
@@ -56,7 +56,7 @@ public class CardBox {
 
         } catch (IOException e) {       //IOException = technischer Fehler
             throw new CardboxStorageException(
-                    "Fehler beim Speichern der CardBox - Zielspeicher voll", e);    // ich weiß jetzt nicht, ob die Message an der Stelle richtig ist bzw. was für eine Message der sehen will
+                    "Fehler beim Speichern der CardBox - Zielspeicher voll");    // ich weiß jetzt nicht, ob die Message an der Stelle richtig ist 
         }
     }
 
@@ -76,8 +76,8 @@ public class CardBox {
             this.cards = cardsnew;
 
 
-        } catch (ClassNotFoundException | IOException e ) {      //IOException = technischer Fehler
-            throw new CardboxStorageException("Fehler beim Laden der Karten - keine Karten vorhanden", e); // ich weiß jetzt nicht, ob die Message an der Stelle richtig ist bzw. was für eine Message der sehen will
+        } catch (Exception e) {
+            throw new CardboxStorageException("Fehler beim Laden der Karten - keine Karten vorhanden"); // ich weiß jetzt nicht, ob die Message an der Stelle richtig ist
         }
     }
 
