@@ -1,7 +1,10 @@
 package exercises.Uebung_3;
 
+import java.io.Serial;
+
 public class DeveloperCard extends AbstractPersonCard {
-    private static final long serialVersionID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
     private boolean enoughCoffee;
 
     public DeveloperCard(int id, String firstName, String lastName, boolean enoughCoffee) {
@@ -18,23 +21,13 @@ public class DeveloperCard extends AbstractPersonCard {
     }
 
     @Override
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    @Override
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    @Override
     public int getId() {
-        return this.serialID;
+        return super.getId();
     }
 
     @Override
     public String getDisplayInfo() {
-        return super.toString + ", genug koffeinisiert = " + enoughCoffee;
+        return super.toString() + ", genug koffeinisiert = " + enoughCoffee;
     }
 
 

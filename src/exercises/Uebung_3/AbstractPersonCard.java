@@ -1,10 +1,12 @@
 package exercises.Uebung_3;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public abstract class AbstractPersonCard implements exercises.Uebung_3.PersonCard, Serializable {
 
-    private static final long serialVersionID = 1L; // um Versionskompatibilität während Serialisierung beizubehalten
+    @Serial
+    private static final long serialVersionUID = 1L; // um Versionskompatibilität während Serialisierung beizubehalten
     private String firstName;
     private String lastName;
     private int id;
