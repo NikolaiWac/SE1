@@ -9,7 +9,7 @@ public class CardBox {
 
     private static CardBox unikat = null;       //wir müssen eine Singleton-Instanz aus der Box machen
     private List<PersonCard> cards;
-    private final static String FILE_NAME = "cardbox.dat";      //Dateiname
+    private final static String FILE_NAME = "cardbox.ser";      //Dateiname
     private CardBox() {         //private, damit die Klasse nicht von außen aufgerufen werden und so mehrfach vorhanden sein kann
         cards = new ArrayList<>();
     }
@@ -49,10 +49,7 @@ public class CardBox {
                      new ObjectOutputStream(
                              new FileOutputStream(FILE_NAME))) {
 
-            for (PersonCard card: cards) {
-                out.writeObject(card);
-            }
-            out.close();  //an dieser Stelle wird die komplette Liste gespeichert
+            out.writeObject(this.cards);
 
         } catch (IOException e) {       //IOException = technischer Fehler
             throw new CardboxStorageException(
@@ -62,23 +59,16 @@ public class CardBox {
 
     public void load() throws CardboxStorageException {
 
-        try {
-            FileInputStream in =  new FileInputStream(FILE_NAME); //ObjectInputStream liefert leider nicht unser gewünschtes Ergebnis bei available, daher Workaround
-            ObjectInputStream inputStream = new ObjectInputStream(in);
-            List<PersonCard> cardsnew = new ArrayList<>();
-
-            while (in.available() > 0) {
-                PersonCard p = (PersonCard) inputStream.readObject();
-                cardsnew.add(p);
-            }
-
-                // Karten laden
-            this.cards = cardsnew;
-
-
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
+            this.cards = (List<PersonCard>) inputStream.readObject();
         } catch (Exception e) {
             throw new CardboxStorageException("Fehler beim Laden der Karten - keine Karten vorhanden"); // ich weiß jetzt nicht, ob die Message an der Stelle richtig ist
         }
+    }
+
+    public void showContent() {
+        PersonCardView view = new PersonCardView();
+        view.showContent(this.cards);
     }
 
     public List<PersonCard> getCurrentList() {
@@ -100,7 +90,7 @@ public class CardBox {
             return "Die ID " + id + " ist nicht vorhanden";
         } else {
             cards.remove(card);
-            return "ID " + id + " erfolgreich gelöscht";
+            return "Die ID " + id + " erfolgreich gelöscht";
         }
     }
 
@@ -112,4 +102,5 @@ public class CardBox {
     public int size(){
         return cards.size();
     }
+
 }
