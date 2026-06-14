@@ -1,4 +1,6 @@
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInput {
@@ -6,6 +8,10 @@ public class UserInput {
     private String userIP;
     private Scanner scIn;
     private UserStoryManagement usm;
+
+    //List für Tasks und UserStorys damit diese mit Load geladen und ohne zu speichern erstellt werden können.
+    private List<Task> SessionTasks;
+    private List<UserStory> SessionUserStorys;
 
     public static void main(String[] args) {
         UserInput ui = new UserInput();
@@ -16,7 +22,9 @@ public class UserInput {
     public UserInput() {
         userIP = "";
         scIn = new Scanner(System.in);
-        usm = UserStoryManagement.getInstance();
+    //    usm = UserStoryManagement.getInstance();
+        SessionTasks = new ArrayList<>();
+        SessionUserStorys = new ArrayList<>();
     }
 
     public void processCommand() {
@@ -51,23 +59,35 @@ public class UserInput {
                 break;
 
             case "load":
-                this.load();
+            //    this.load();
                 break;
 
             case "save":
-                this.save();
+            //    this.save();
                 break;
         }
 
     }
 
     private void tasks() {
-        println(usm.getTasks());
-
+        for (Task task : SessionTasks) {
+            System.out.println(task);
+        }
     }
 
     private void stories() {
-        println(usm.getUserStories());
+        for (UserStory userstory : SessionUserStorys){      //für jede Story gehe jede ihrer taks durch und suche nach der id in allen Tasks und gebe diese zurück
+            System.out.println(SessionUserStorys);          //könnte man auch einfacher regeln indem direkt die task übergeben wird allerdings würde dann bei einer enerdung
+            int[] tasks = userstory.getTasks();             //der task nicht auch die task welche die Story hält geendert. (id system wäre sinnlos)
+            for (int i = 0; i<tasks.length;i++){
+                for (Task task : SessionTasks) {
+                    if (task.getId() == tasks[i]) {
+                        System.out.println(task);
+                        break;
+                    }
+                }
+            }
+        }
 
     }
 
@@ -79,7 +99,7 @@ public class UserInput {
         println("Please enter Task ID:");
         int tID = scIn.nextInt();
         try {
-            usm.assign(usID, tID);
+            Task_assign(usID, tID);
         }catch(Exception e) {
             println("The was an error: "+ e.getMessage());
             return;
@@ -92,7 +112,7 @@ public class UserInput {
         scIn.nextLine();
         println("Please write a task description:");
         String desc = scIn.nextLine();
-        usm.createTask(desc);
+        createTask(desc);
         println("Task created.");
 
     }
@@ -110,11 +130,11 @@ public class UserInput {
                 break;
             scIn.nextLine();
         }
-        usm.createUserStory(desc,prio);
+        createUserStory(desc,prio);
         println("Story created.");
     }
 
-    public void save() {
+    /*public void save() {
         try {
             UserStoryManagement.save();
         }catch(Exception e) {
@@ -122,8 +142,9 @@ public class UserInput {
         }
         println("Save sucessfull.");
     }
+    */
 
-    public void load() {
+    /*public void load() {
         try {
             UserStoryManagement.load();
         }catch(Exception e) {
@@ -131,7 +152,7 @@ public class UserInput {
         }
         println("Load successful.");
     }
-
+    */
 
     private void println(String m) {
         System.out.println(m);
@@ -139,5 +160,37 @@ public class UserInput {
 
     private void print(String m) {
         System.out.print(m);
+    }
+    public void createTask(String disc){
+        Task task = new Task(disc);
+        this.SessionTasks.add(task);
+    }
+    public void createUserStory(String disc,int prio){
+        UserStory userstory = new UserStory(disc,prio);
+        this.SessionUserStorys.add(userstory);
+    }
+
+    public void Task_assign(int usID, int tID) throws Exception {
+        boolean foundsomething = false;
+        for (Task task : SessionTasks){
+            if(task.getId() == tID){
+                foundsomething = true;
+                break;
+            }
+        }
+        if(!foundsomething) {
+            throw new Exception("Task wurde nicht gefunden");
+        }
+        foundsomething = false;
+        for(UserStory userstory : SessionUserStorys){
+            if(userstory.getId() == usID){
+                userstory.addTask(tID);
+                foundsomething = true;
+                break;
+            }
+        }
+        if(!foundsomething) {
+            throw new Exception("UserStory wurde nicht gefunden");
+        }
     }
 }
