@@ -59,7 +59,7 @@ public class CardBox {
 
     public void load() throws CardboxStorageException {
 
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(FILE_NAME))) { //ObjectInputStream liefert leider nicht unser gewünschtes Ergebnis bei available, daher Workaround
             this.cards = (List<PersonCard>) inputStream.readObject();
         } catch (Exception e) {
             throw new CardboxStorageException("Fehler beim Laden der Karten - keine Karten vorhanden"); // ich weiß jetzt nicht, ob die Message an der Stelle richtig ist
