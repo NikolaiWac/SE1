@@ -1,46 +1,17 @@
-import java.util.ArrayList;
-import java.util.List;
+package exercises.Uebung_4;
 
-public class UserStory {
-    private static int idcount = 0;
-    private int id;
-    private List<Integer> TaskIds;
-    private String desc;
-    private int prio;
-    private final  String[] prios = {"Must","Should","Could","Won't Have"};
-
-
-    public UserStory(String desc,int prio){
-        this.desc = desc;
-        this.prio = prio;
-        this.id = idcount;
-        idcount++;
-        TaskIds = new ArrayList<>();
-    }
-    public UserStory(String desc,int prio,int id){  //Only use if Load data.
-        this.desc = desc;
-        this.prio = prio;
-        this.id = id;
-    }
-
-    public int getId(){
-        return id;
-    }
-    public int[] getTasks(){
-        int[] ret = new int[TaskIds.size()];
-        int i = 0;
-        for (int taskid : TaskIds){
-            ret[i] = taskid;
-            i++;
-        }
-        return ret;
-    }
-    public void addTask(int task){
-        this.TaskIds.add(task);
+public class UserStory extends StorageObject {
+    public static final String[] priorities = {"Must Have", "Should Have", "Could Have", "Won't Have"};
+    private static final long serialVersionUID = 2L;
+    private int priority;
+    public UserStory( String description, int priority) {
+        super("UserStory", description);
+        this.priority = priority;
     }
 
     @Override
-    public String toString(){
-        return id + " " + desc + " " + prios[prio];
+    public String toString() {
+        return String.format("%s %s \t|", super.toString(),UserStory.priorities[this.priority]);
     }
+
 }
