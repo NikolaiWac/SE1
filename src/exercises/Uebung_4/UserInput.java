@@ -132,11 +132,6 @@ public class UserInput {
 
 
     public void load() {
-        try {
-            UserStoryManagement.load();
-        }catch(Exception e) {
-            println("Exception!"+e.getMessage());
-        }
         println("Load successful.");
     }
 

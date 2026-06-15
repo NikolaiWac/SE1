@@ -1,4 +1,7 @@
-public class NoUserStoryException {
+package exercises.Uebung_4;
+
+
+public class NoUserStoryException extends Exception {
         private static final long serialVersionUID = 1L;
 
 

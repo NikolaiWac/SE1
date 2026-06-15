@@ -105,7 +105,7 @@ public class UserStoryManagement implements Serializable{
         oOut.close();
     }
 
-    public static void load() throws IOException, FileNotFoundException, ClassNotFoundException{
+    public static void load() throws NoUserStoryException, IOException, FileNotFoundException, ClassNotFoundException{
         FileInputStream fIn = new FileInputStream("UserStoryManagement.obj");
         ObjectInputStream oIn = new ObjectInputStream(fIn);
         UserStoryManagement.instance = (UserStoryManagement) oIn.readObject();
